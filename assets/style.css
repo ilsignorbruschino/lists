@@ -177,3 +177,5 @@ main { padding-top: 2rem; padding-bottom: 3rem; }
   .dati { grid-template-columns: 1fr; gap: 0.1rem; }
   .dati dd { margin-bottom: 0.6rem; }
 }
+
+.piede code { font-size: 0.85em; }
