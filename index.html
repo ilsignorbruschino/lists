@@ -1,0 +1,65 @@
+---
+layout: default
+---
+{% assign liste = site.liste | sort: "codice" %}
+<section class="ricerca">
+  <label for="cerca">Cerca per codice o parola chiave</label>
+  <input id="cerca" type="search" autocomplete="off" spellcheck="false" placeholder="Per esempio L0001, primi, partizioni">
+  <p class="conteggio" id="conteggio" aria-live="polite">{{ liste | size }} liste</p>
+</section>
+
+<div class="tabella">
+  <table class="catalogo">
+    <thead>
+      <tr><th scope="col">Codice</th><th scope="col">Lista</th><th scope="col" class="numero">Elementi</th></tr>
+    </thead>
+    <tbody id="righe">
+      {% for l in liste %}
+      <tr data-cerca="{{ l.codice }} {{ l.titolo | escape }} {{ l.parole_chiave | join: ' ' | escape }} {{ l.content | strip_html | strip_newlines | escape }}">
+        <td class="codice"><a href="{{ l.url | relative_url }}">{{ l.codice }}</a></td>
+        <td>{{ l.titolo }}</td>
+        <td class="numero">{{ l.elementi }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<p class="vuoto" id="vuoto" hidden>Nessuna lista corrisponde alla ricerca. Prova con un'altra parola chiave o con un codice, come L0001.</p>
+
+<script>
+(function () {
+  var norma = function (s) {
+    return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  };
+  var box = document.getElementById('cerca');
+  var conta = document.getElementById('conteggio');
+  var vuoto = document.getElementById('vuoto');
+  var righe = Array.prototype.slice.call(document.querySelectorAll('#righe tr'));
+  var totale = righe.length;
+  righe.forEach(function (r) { r.testo = norma(r.getAttribute('data-cerca')); });
+
+  function filtra() {
+    var parole = norma(box.value).split(/\s+/).filter(Boolean);
+    var n = 0;
+    righe.forEach(function (r) {
+      var ok = parole.every(function (p) { return r.testo.indexOf(p) !== -1; });
+      r.hidden = !ok;
+      if (ok) n++;
+    });
+    if (parole.length === 0) {
+      conta.textContent = totale === 1 ? '1 lista' : totale + ' liste';
+    } else {
+      conta.textContent = n + (n === 1 ? ' lista trovata' : ' liste trovate') + ' su ' + totale;
+    }
+    vuoto.hidden = n > 0;
+    var url = new URL(window.location.href);
+    if (box.value.trim()) { url.searchParams.set('q', box.value.trim()); } else { url.searchParams.delete('q'); }
+    history.replaceState(null, '', url);
+  }
+
+  var q = new URLSearchParams(window.location.search).get('q');
+  if (q) { box.value = q; }
+  box.addEventListener('input', filtra);
+  filtra();
+})();
+</script>

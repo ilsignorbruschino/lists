@@ -1,0 +1,20 @@
+title: lists
+description: Liste di oggetti matematici, ciascuna scaricabile come file di testo.
+url: "https://ilsignorbruschino.github.io"
+baseurl: "/lists"
+lang: it
+
+collections:
+  liste:
+    output: true
+    permalink: /:collection/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: liste
+    values:
+      layout: lista
+
+exclude:
+  - README.md
