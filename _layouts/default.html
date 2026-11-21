@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.codice %}{{ page.codice }} – {{ page.titolo | strip_html }} – {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ site.description }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+  <script>
+    window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
+</head>
+<body>
+  <header class="testata">
+    <div class="contenitore">
+      <a class="marchio" href="{{ '/' | relative_url }}">lists</a>
+      <p class="motto">Liste di oggetti matematici. Ogni lista ha un codice, una breve descrizione e un file di testo da scaricare.</p>
+    </div>
+  </header>
+  <main class="contenitore">
+    {{ content }}
+  </main>
+  <footer class="contenitore piede">
+    <p>Ogni file è testo semplice, un elemento per riga. Il sorgente del sito è su <a href="https://github.com/ilsignorbruschino/lists">GitHub</a>.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,179 @@
+:root {
+  --carta: #f7f9fc;
+  --inchiostro: #1a2b4c;
+  --grigio: #56688a;
+  --riga: #d3dbe8;
+  --quadretto: #e4eaf4;
+  --accento: #2b59d1;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --carta: #111826;
+    --inchiostro: #e2e8f3;
+    --grigio: #9aa8c0;
+    --riga: #2a364d;
+    --quadretto: #19223a;
+    --accento: #8ea8ff;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html {
+  font-family: "STIX Two Text", "STIX Two", "Times New Roman", Georgia, serif;
+  font-size: 112.5%;
+  line-height: 1.6;
+  font-variant-numeric: lining-nums;
+}
+
+body {
+  margin: 0;
+  background: var(--carta);
+  color: var(--inchiostro);
+}
+
+a { color: var(--accento); }
+a:focus-visible, input:focus-visible {
+  outline: 2px solid var(--accento);
+  outline-offset: 2px;
+}
+
+.contenitore {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+/* Testata a quadretti, come un foglio di brutta */
+.testata {
+  background-color: var(--carta);
+  background-image:
+    linear-gradient(var(--quadretto) 1px, transparent 1px),
+    linear-gradient(90deg, var(--quadretto) 1px, transparent 1px);
+  background-size: 1.25rem 1.25rem;
+  border-bottom: 1px solid var(--riga);
+}
+.testata .contenitore { padding-top: 2.5rem; padding-bottom: 1.75rem; }
+
+.marchio {
+  font-size: 3.2rem;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--inchiostro);
+  text-decoration: none;
+}
+.motto {
+  margin: 0.75rem 0 0;
+  max-width: 34rem;
+  color: var(--grigio);
+}
+
+main { padding-top: 2rem; padding-bottom: 3rem; }
+
+/* Ricerca */
+.ricerca label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+.ricerca input {
+  width: 100%;
+  font: inherit;
+  font-size: 1.15rem;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--grigio);
+  border-radius: 3px;
+  background: var(--carta);
+  color: var(--inchiostro);
+}
+.conteggio {
+  margin: 0.5rem 0 1.5rem;
+  color: var(--grigio);
+  font-size: 0.95rem;
+}
+
+/* Catalogo */
+.tabella { overflow-x: auto; }
+.catalogo {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.catalogo th {
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--grigio);
+  padding: 0.35rem 0.5rem;
+  border-bottom: 1.5px solid var(--inchiostro);
+}
+.catalogo td {
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid var(--riga);
+  vertical-align: baseline;
+}
+.catalogo .codice a { font-weight: 600; white-space: nowrap; }
+.catalogo .numero { text-align: right; color: var(--grigio); }
+.vuoto { color: var(--grigio); margin-top: 1.5rem; }
+
+/* Pagina di una lista */
+.codice-grande {
+  margin: 0;
+  font-size: 3.6rem;
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.titolo {
+  margin: 0.5rem 0 1.5rem;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.3;
+}
+.descrizione { max-width: 38rem; }
+.descrizione p { margin: 0 0 1rem; }
+
+.dati {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.35rem 1.5rem;
+  margin: 1.75rem 0;
+  padding: 1rem 0;
+  border-top: 1px solid var(--riga);
+  border-bottom: 1px solid var(--riga);
+}
+.dati dt { color: var(--grigio); }
+.dati dd { margin: 0; }
+
+.scarica {
+  display: inline-block;
+  padding: 0.7rem 1.3rem;
+  background: var(--accento);
+  color: var(--carta);
+  border-radius: 3px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.scarica:hover { filter: brightness(1.1); }
+
+.indietro { margin-top: 2rem; }
+
+.piede {
+  border-top: 1px solid var(--riga);
+  padding-top: 1.25rem;
+  padding-bottom: 2.5rem;
+  color: var(--grigio);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 36rem) {
+  .marchio { font-size: 2.5rem; }
+  .codice-grande { font-size: 2.7rem; }
+  .catalogo .numero { display: none; }
+  .dati { grid-template-columns: 1fr; gap: 0.1rem; }
+  .dati dd { margin-bottom: 0.6rem; }
+}

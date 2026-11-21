@@ -1,0 +1,25 @@
+---
+layout: default
+---
+<article class="scheda">
+  <p class="codice-grande">{{ page.codice }}</p>
+  <h1 class="titolo">{{ page.titolo }}</h1>
+
+  <div class="descrizione">
+    {{ content }}
+  </div>
+
+  <dl class="dati">
+    {% if page.elementi %}<dt>Elementi</dt><dd>{{ page.elementi }}</dd>{% endif %}
+    {% if page.formato %}<dt>Formato</dt><dd>{{ page.formato }}</dd>{% endif %}
+    {% if page.parole_chiave %}
+    <dt>Parole chiave</dt>
+    <dd>{% for k in page.parole_chiave %}<a href="{{ '/' | relative_url }}?q={{ k | url_encode }}">{{ k }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}</dd>
+    {% endif %}
+  </dl>
+
+  {% assign nome_file = page.file | split: '/' | last %}
+  <a class="scarica" href="{{ page.file | relative_url }}" download>Scarica {{ nome_file }}</a>
+
+  <p class="indietro"><a href="{{ '/' | relative_url }}">Torna a tutte le liste</a></p>
+</article>
