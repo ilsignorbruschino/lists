@@ -1,8 +1,8 @@
 # lists
 
-Liste di oggetti matematici, ciascuna scaricabile come file di testo.
+Mathematical lists, available to download as a text file.
 
-Sito: https://ilsignorbruschino.github.io/lists/
+website: https://ilsignorbruschino.github.io/lists/
 
 ## Come aggiungere una lista
 
